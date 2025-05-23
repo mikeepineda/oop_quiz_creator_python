@@ -17,3 +17,16 @@ class QuizQuestion:
             "options": self.options,
             "answer": self.correct_answer
         }
+    
+    @staticmethod
+    def create_from_input():
+        print("\n=== Create a New Quiz Question ===")
+        question_text = input("Input your question here or type 'stop' to finish: ")
+        if question_text.lower() == "stop":
+            return None
+
+        options = {}
+        options["a"] = input("Input option a: ")
+        options["b"] = input("Input option b: ")
+        options["c"] = input("Input option c: ")
+        options["d"] = input("Input option d: ")
