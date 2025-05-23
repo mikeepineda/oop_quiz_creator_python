@@ -38,3 +38,27 @@ class QuizQuestion:
                 print("Invalid input. Please enter a, b, c, or d.")
 
         return QuizQuestion(question_text, options, correct_answer)
+    
+class QuizManager:
+    def __init__(self, data_file="quiz_data.json"):
+        self.data_file = data_file
+        self.questions = self.load_questions()
+        
+    def load_questions(self):
+        if os.path.exists(self.data_file):
+            with open(self.data_file, "r") as file:
+                loaded_data = json.load(file)
+                return [
+                    QuizQuestion(question["question"], question["options"], question["answer"])
+                    for question in loaded_data
+                ]
+        return []
+
+    def save_questions(self):
+        with open(self.data_file, "w") as file:
+            json.dump([question.to_dict() for question in self.questions], file, indent=4)
+
+    def add_question(self, quiz_question):
+        self.questions.append(quiz_question)
+        self.save_questions()
+        print("Your question was saved!")
