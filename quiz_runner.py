@@ -120,3 +120,29 @@ class QuizApplication(QWidget):
             f"🎉 You scored {self.current_score} out of {len(self.quiz_questions)}"
         )
         self.close()
+
+class QuizFileLoader:
+    @staticmethod
+    def load_quiz_data_from_file():
+        file_dialog = QFileDialog()
+        selected_file_path, selected_filter = file_dialog.getOpenFileName(
+            None, "Select Quiz File", "", "JSON Files (*.json)"
+        )
+        if selected_file_path:
+            with open(selected_file_path, 'r') as quiz_file:
+                return json.load(quiz_file)
+        return None
+
+
+class QuizProgramRunner:
+    def run(self):
+        quiz_application_instance = QApplication(sys.argv)
+        quiz_data = QuizFileLoader.load_quiz_data_from_file()
+        if quiz_data:
+            quiz_interface_window = QuizApplication(quiz_data)
+            quiz_interface_window.show()
+            sys.exit(quiz_application_instance.exec_())
+        else:
+            QMessageBox.critical(None, "Error", "Failed to load quiz file.")
+            sys.exit()
+
