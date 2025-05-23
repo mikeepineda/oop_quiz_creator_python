@@ -125,7 +125,7 @@ class QuizApplication(QWidget):
 
 def open_quiz_file():
     file_dialog_instance = QFileDialog()
-    selected_file_path, _ = file_dialog_instance.getOpenFileName(
+    selected_file_path, selected_filter = file_dialog_instance.getOpenFileName(
         None, "Select Quiz File", "", "JSON Files (*.json)"
     )
     if selected_file_path:
