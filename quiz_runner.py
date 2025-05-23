@@ -146,3 +146,6 @@ class QuizProgramRunner:
             QMessageBox.critical(None, "Error", "Failed to load quiz file.")
             sys.exit()
 
+if __name__ == "__main__":
+    quiz_program = QuizProgramRunner()
+    quiz_program.run()
