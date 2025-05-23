@@ -62,3 +62,23 @@ class QuizManager:
         self.questions.append(quiz_question)
         self.save_questions()
         print("Your question was saved!")
+
+def main():
+    quiz_manager = QuizManager()
+
+    while True:
+        new_question = QuizQuestion.create_from_input()
+        if new_question is None:
+            break
+
+        quiz_manager.add_question(new_question)
+
+        continue_input = input("\nDo you want to add another question? (yes/no): ").lower()
+        if continue_input != "yes":
+            break
+
+    print(f"\nAll questions are saved to {quiz_manager.data_file}")
+
+
+if __name__ == "__main__":
+    main()
