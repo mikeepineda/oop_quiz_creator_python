@@ -30,3 +30,11 @@ class QuizQuestion:
         options["b"] = input("Input option b: ")
         options["c"] = input("Input option c: ")
         options["d"] = input("Input option d: ")
+
+        correct_answer = ""
+        while correct_answer not in ["a", "b", "c", "d"]:
+            correct_answer = input("What letter is the correct answer (a/b/c/d)? ").lower()
+            if correct_answer not in ["a", "b", "c", "d"]:
+                print("Invalid input. Please enter a, b, c, or d.")
+
+        return QuizQuestion(question_text, options, correct_answer)
